@@ -1,0 +1,117 @@
+
+
+Sesión 1: El intérprete de comandos: shell
+PREGUNTA 1. ¿Qué comandos habéis utilizado para crear los directorios S1..S5?
+PREGUNTA 2. ¿Qué comando utilizas para listar el contenido de un directorio? ¿Qué opción hay que añadir para ver los ficheros ocultos?
+PREGUNTA 3. ¿Qué opción hay que añadir a ls para ver información extendida de los ficheros? ¿Qué campos se ven por defecto con esa opción?
+PREGUNTA 4. ¿Qué opciones de menú has activado para extender la información que muestra el File Browser?
+PREGUNTA 5. ¿Qué secuencia de comandos has ejecutado para borrar un directorio, comprobar que no está y volver a crearlo?
+PREGUNTA 6. ¿Qué diferencia hay entre el comando cat y less?
+PREGUNTA 7. ¿Para qué sirve la opción -i del comando cp? ¿Cuál es la orden para hacer un alias del comando cp que incluya la opción -i?
+PREGUNTA 8. ¿Qué hace la opción -i del comando rm? ¿Y la opción -i del mv? Escribe la orden para hacer un alias del comando rm que incluya la opción -i.
+PREGUNTA 9. ¿Qué opciones de chmod has utilizado para dejar solamente los permisos de escritura? ¿Qué resultado ha devuelvo cat al intentar ver el fichero test? ¿Qué opciones de chmod has utilizado para dejar solamente los permisos de lectura? ¿Has conseguido borrarlo?
+PREGUNTA 10. ¿Cuál es el significado de las variables de entorno PATH, HOME y PWD? 
+PREGUNTA 11. La variable PATH es una lista de directorios, ¿Qué carácter hacer de separador entre un directorio y otro? 
+PREGUNTA 12. ¿Qué comando has usado para definir y consultar el valor de las nuevas variables que has definido? 
+PREGUNTA 13. ¿Qué versión de la se ha ejecutado? ¿El ls del sistema o el que te acabas de bajar? Ejecuta el comando "which ls" para comprobarlo.
+PREGUNTA 14. ¿El directorio en el que estás, está definido en la variable PATH? ¿Qué implica esto?
+PREGUNTA 15. ¿Qué programa se ha ejecutado? ¿El ls del sistema o el que te acabas de bajar? Ejecuta el comando "which ls" para comprobarlo.
+PREGUNTA 16. ¿Qué programa ls se ha ejecutado? ¿El ls del sistema o el que te acabas de bajar? Ejecuta el comando "which ls" para comprobarlo.
+PREGUNTA 17. ¿Qué diferencia hay entre utilizar  > y >>?
+
+
+Sesión 2: El lenguaje C
+PREGUNTA 18. ¿Qué opción has tenido que añadir al gcc para generar el fichero objecto? ¿Qué opción has tenido que añadir al gcc para que el compilador encuentre el fichero mis_funciones.h?
+
+
+Sesión 3: Procesos
+PREGUNTA 19. ¿Cómo puede saber un proceso el pid de sus hijos? ¿Qué llamada pueden utilizar los procesos para consultar su propio PID?
+PREGUNTA 20. ¿En qué casos se ejecutará cualquier código que aparezca justo después de la llamada execlp (En cualquier caso/ En caso que el execlp se ejecute de forma correcta/ En caso que el exclp falle)?
+PREGUNTA 21. ¿Qué directorios hay dentro de /proc/PID_PADRE? ¿Qué opción de ls has usado?
+PREGUNTA 22. Apunta el contenido de los ficheros status y cmdline. Compara el contenido del fichero environ con el resultado del comando env (fíjate por ejemplo en la variable PATH y la variable PWD) ¿Qué relación hay? Busca en el contenido del fichero status el estado en el que se encuentra el proceso y apúntalo en el fichero de respuestas. 
+PREGUNTA 23. ¿A qué ficheros "apuntan" los ficheros cwd y exe? ¿Cuál crees que es el significado de cwd y exe?
+PREGUNTA 24. ¿Puedes mostrar el contenido de los ficheros environ, status y cmdline del proceso hijo? ¿En qué estado se encuentra el hijo?
+PREGUNTA 25. Comprueba el fichero status de /proc/PID_PADRE /proc/PID_HIJO(s). ¿En qué estado está el proceso padre? ¿En qué estado están los hijos? 
+PREGUNTA 26. ¿Qué has hecho para guardar la salida de las ejecuciones de myPS3?
+
+
+
+Sesión 4: Comunicación de procesos 
+PREGUNTA 27. ¿Qué le pasa al padre ahora cuando le llega el evento SIGALRM?
+PREGUNTA 28. ¿Qué pasa con la tabla de tratamientos de signals si hacemos un execlp (y cambiamos el código)? ¿Se mantiene la reprogramación de signals? ¿Se pone por defecto? 
+PREGUNTA 29. El programa ejemplo_waitpid, ¿Es secuencial o concurrente?
+PREGUNTA 30. Ejecuta el programa alarm2 en un terminal y comprueba su PID. Abre una nueva sesión y cambia al usuario so1 (ejecuta #su so1). Intenta enviar signals al proceso que está ejecutando alarm2 desde la sesión iniciada con el usuario so1. ¿Puedes enviárselos?, ¿qué error da?
+PREGUNTA 31. Crea una copia de eventos.c con el nombre eventos2.c . Modifica el código de eventos2.c para que la segunda vez que reciba el mismo signal se ejecute el comportamiento por defecto de ese signal. PISTA: consulta en la página del manual del signal la constante SIG_DFL ¿Qué mensaje muestra el Shell cuando se envía por segunda vez el mismo signal?
+PREGUNTA 32. Ejecuta el programa signal_perdido pasándole como parámetro 1. Anota en el fichero respuestas.txt qué resultado observas. A continuación ejecuta de nuevo el programa pasándole como parámetro 0. Anota de nuevo en respuestas.txt el resultado que observas y explica a qué se debe
+ 
+
+Sesión 5: Gestión de Memoria
+PREGUNTA 33. ¿Qué variables aparecen en la salida del nm de mem1_dynamic? ¿Qué dirección ocupa cada una? Indica a que región pertenece cada variable según la salida del nm y el tipo de variable (local o global).
+PREGUNTA 34. Para los dos ejecutables, compilado estático y dinámico, observa su tamaño, la salida de los comandos nm y objdump ¿En qué se diferencian los dos ejecutables?
+PREGUNTA 35. Observa el contenido del fichero maps del /proc para cada proceso y apunta para cada región la dirección inicial, dirección final y etiqueta asociada. ¿Qué diferencia hay entre el maps de cada proceso?
+PREGUNTA 36. ¿A qué región de las descritas en el maps pertenece cada variable y cada zona reservada con malloc? Apunta la dirección inicial, dirección final y el nombre de la región.
+PREGUNTA 37. Para cada ejecución apunta el número de mallocs hechos y la dirección inicial y final del heap que muestra el fichero maps del /proc. ¿Cambia el tamaño según el parámetro de entrada? ¿Por qué?
+PREGUNTA 38. ¿Cuál es el tamaño del heap? ¿Cambia el tamaño según el resultado de la pregunta anterior? ¿Por qué?
+PREGUNTA 39. Para cada ejecución apunta el número de mallocs hechos y la dirección inicial y final del heap que se muestra en el maps del /proc. ¿Cambia el tamaño del heap respecto al observado en la pregunta 6? ¿Por qué?
+PREGUNTA 40. ¿Qué error contiene el código del programa? ¿Por qué el programa no falla en las primeras iteraciones? Propón una alternativa a este código que evite que se genere la excepción, detectando, antes de que pase, que vamos a hacer un acceso fuera del espacio de direcciones.
+
+
+
+Sesión 6: Análisis de rendimiento
+PREGUNTA 41. Apunta en el fichero entrega.txt el número de unidades de cálculo (cores o CPUS) que tienes en la máquina. 
+PREGUNTA 42. Apunta el tiempo medio, máximo y mínimo para una instancia en la Tabla 1 de la hoja de cálculo adjunta.
+PREGUNTA 43. Anota para cada experimento los tiempos medio, máximo y mínimo en la Tabla 1 de la hoja de cálculo adjunta.
+PREGUNTA 44. ¿Cómo se ve afectado el tiempo de ejecución del proceso?
+PREGUNTA 45. ¿Qué %CPU ha asignado el sistema a cada proceso? 
+PREGUNTA 46. La asignación, ¿ha sido por proceso o por usuario? ¿Crees que es posible que 1 usuario sature el sistema con este criterio?
+PREGUNTA 47. ¿Cómo se ve afectado el tiempo de ejecución de FIB respecto al número de instancias de BAJA_PRIO_FIB?
+PREGUNTA 48. ¿Qué %CPU ha asignado el sistema a cada proceso con 2 y 5 instancias de BAJA_PRIO_FIB?
+PREGUNTA 49. ¿Cuánta memoria física tiene el sistema (F) en bytes?
+PREGUNTA 50.  Rellena la siguiente tabla, añádela al fichero RendimientoProcesos.ods. ¿En la Ejecución 2 por qué crees que cambia el tiempo de acceso según el número de iteración? 
+PREGUNTA 51. Rellena la siguiente tabla , añádela al fichero RendimientoProcesos.ods (suma los fallos de página de todos los procesos de una misma ejecución):
+
+
+
+Sesión 7: Gestión de Entrada/Salida
+PREGUNTA 52. Apunta en el fichero "entrega.txt" los comandos que has utilizado en cada apartado. Además entrega el fichero "es1_v2.c" ¿Qué diferencias observas en las dos ejecuciones de strace? ¿Cuántas llamadas a sistema read ejecuta cada versión? ¿Qué influencia puede tener sobre el rendimiento de ambas versiones de código? ¿Por qué?
+PREGUNTA 53. Explica las diferencias observadas en la salida del programa cuando el primer parámetro vale 0 o 1. ¿Para qué crees que sirve este parámetro?
+PREGUNTA 54. Explica el motivo de los resultados observados dependiendo del formato fichero de entrada.
+PREGUNTA 55. Explica las diferencias observadas entre la salida del programa es3 y es4. ¿Por qué la salida es inteligible para uno de los ficheros de entrada y no para el otro?
+PREGUNTA 56. Escribe los valores que ha mostrado el script showCpuTime.sh para cada uno de los procesos y comenta las diferencias entre ellos en cuanto al cosumo de cpu. ¿A qué se deben? Identifica las líneas de código de marcan la diferencia entre ellos
+PREGUNTA 57. Anota en el fichero entrega.txt el resultado de ambas ejecuciones. Entrega el código programado en el fichero es6_v2.c
+PREGUNTA 58. ¿Qué pasaría si no añadiéramos siginterrupt al código? Repite las ejecuciones anteriores eliminando el siginterrupt y anota el resultado en el fichero entrega.txt. 
+PREGUNTA 59. ¿Estaban ya en uso el major especificado en el código? En caso afirmativo, ¿qué driver lo estaba utilizando?
+PREGUNTA 60. Apunta la línea de la salida de lsmod correspondiente a myDriver1 y myDriver2. 
+PREGUNTA 61. Apunta la línea de  comandos que has utilizado para crear el dispositivo.
+PREGUNTA 62. Anota en el fichero "entrega.txt" el resultado de la ejecución y explica a qué se debe.
+PREGUNTA 63. Anota el resultado de la ejecución. Explica el motivo de las diferencias observadas comparando la salida de este ejercicio con la de la apartado 4.
+
+
+
+Sesión 8: Gestión de Entrada/Salida
+PREGUNTA 64. ¿Qué contiene el fichero al final de la ejecución? ¿Cómo se explica ese contenido?
+PREGUNTA 65. ¿Acaba el programa padre? ¿y el hijo? ¿Por qué?.
+PREGUNTA 66. Si quisiéramos que el lector también pudiera enviar un mensaje al escritor ¿podríamos utilizar la misma pipe con nombre o deberíamos crear otra? Razona la respuesta.
+
+
+
+Sesión 9: Sistema de Ficheros
+PREGUNTA 67. Contesta a las siguientes preguntas en el fichero "entrega.txt"
+* ¿Cual/es de los comandos anteriores han dado error al intentar ejecutarlos? Explica porqué.
+* Explicar el resultado de ejecutar el comando "stat" utilizando como parámetro cada uno de los nombres simbólicos que has creado anteriormente.
+* ¿Cuál sería el contenido de los ficheros D, E, F y G? Comenta las diferencias que observas al utilizar los comandos "more" o "cat" para ver el contenido del fichero y el resultado de utilizar el comando "readlink".
+* Escribe en papel los accesos que se realizan cuando se accede a los ficheros: "$HOME/A/F", "$HOME/A/E" y "$HOME/A/G". Ahora compáralos con el resultado que obtienes cuando ejecutas el comando "namei" con cada uno de los ficheros anteriores. ¿Si ejecutas "readlink $HOME/A/F" se realizan los mismos accesos? ¿Cómo influye el hecho de que en unos casos sea una ruta absoluta a un fichero y en otros una ruta relativa?
+* Crea un soft link de un fichero a si mismo (un fichero que no exista previamente). Comenta el resultado de mirar su contenido utilizando el comando "cat". Observa como controla el sistema la existencia de ciclos en el sistema de ficheros. Ejecuta el comando "namei" y comenta su resultado.
+PREGUNTA 68. Entrega el fichero append.c.
+PREGUNTA 69. Entrega el fichero invirtiendo_fichero.c.
+PREGUNTA 70. Entrega el fichero insertarx2.c.
+
+Sesión 10: Concurrencia y Paralelismo
+PREGUNTA 71. ¿Qué diferencia observas en el tiempo de ejecución de cada uno de los programas? ¿A qué se debe?
+PREGUNTA 72. En el programa fork_compartMem.c, ¿qué valor ve el proceso hijo al principio de su ejecución en las variables a y pidPadre? ¿Y al final? ¿qué valores ve el proceso padre al final de su ejecución? ¿Cómo explicas este comportamiento?
+PREGUNTA 73. En el programa thread_compartMem.c, ¿qué valor ve el pthread hijo al principio de su ejecución en las variables a y pidPadre? ¿Y al final? ¿qué valores ve el proceso padre al final de su ejecución? ¿Cómo explicas este comportamiento?
+PREGUNTA 74. ¿A qué se debe este error?
+PREGUNTA 75. En la línea marcada como "PUNTO 1" ¿en qué posición de memoria se está guardando el valor 1111? ¿Qué variable ocupa esa posición de memoria? ¿Qué mensajes muestran el padre y el pthread? ¿Sería posible que un pthread acceda a las variables locales de otro pthread? ¿En qué condiciones?
+PREGUNTA 76. ¿Qué mensajes muestran ahora el padre y el pthread? ¿A qué se debe esta diferencia en el comportamiento? 
+PREGUNTA 77. ¿El proceso principal imprime siempre el mismo valor? ¿A qué es debido?
+PREGUNTA 78.  Anota en el fichero entrega.txt qué líneas de código forman la región crítica  que provoca la condición de carrera.

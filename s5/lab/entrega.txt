@@ -1,0 +1,86 @@
+Sesión 5: Gestión de Memoria
+PREGUNTA 33. ¿Qué variables aparecen en la salida del nm de mem1_dynamic? ¿Qué dirección ocupa cada una? Indica a que región pertenece cada variable según la salida del nm y el tipo de variable (local o global).
+
+0804a060 B globalArray - global
+
+
+PREGUNTA 34. Para los dos ejecutables, compilado estático y dinámico, observa su tamaño, la salida de los comandos nm y objdump ¿En qué se diferencian los dos ejecutables?
+	ls -ltr
+	-rwxr-xr-x 1 alumne alumne 578138 2013-03-19 15:51 mem1_static
+	-rwxr-xr-x 1 alumne alumne   7392 2013-03-19 15:51 mem1_dynamic
+	el statico(578,2kB) ocupa mas que el dinamico(7,3kb) en memoria
+	el statico contiene mas instruciones que el dinamico
+
+
+PREGUNTA 35. Observa el contenido del fichero maps del /proc para cada proceso y apunta para cada región la dirección inicial, dirección final y etiqueta asociada. ¿Qué diferencia hay entre el maps de cada proceso?
+
+
+(static)
+005bb000-005bc000 r-xp 00000000 00:00 0          [vdso]
+08048000-080c5000 r-xp 00000000 08:01 3241047    /home/alumne/Desktop/s5/lab/mem1_static
+080c5000-080c7000 rw-p 0007c000 08:01 3241047    /home/alumne/Desktop/s5/lab/mem1_static
+080c7000-080ca000 rw-p 00000000 00:00 0 
+0970d000-0972f000 rw-p 00000000 00:00 0          [heap]
+bfa42000-bfa57000 rw-p 00000000 00:00 0          [stack]
+
+(Dynamic)
+
+00110000-00263000 r-xp 00000000 08:01 16006      /lib/tls/i686/cmov/libc-2.11.1.so
+00263000-00264000 ---p 00153000 08:01 16006      /lib/tls/i686/cmov/libc-2.11.1.so
+00264000-00266000 r--p 00153000 08:01 16006      /lib/tls/i686/cmov/libc-2.11.1.so
+00266000-00267000 rw-p 00155000 08:01 16006      /lib/tls/i686/cmov/libc-2.11.1.so
+00267000-0026a000 rw-p 00000000 00:00 0 
+00a74000-00a75000 r-xp 00000000 00:00 0          [vdso]
+00e6d000-00e88000 r-xp 00000000 08:01 14923      /lib/ld-2.11.1.so
+00e88000-00e89000 r--p 0001a000 08:01 14923      /lib/ld-2.11.1.so
+00e89000-00e8a000 rw-p 0001b000 08:01 14923      /lib/ld-2.11.1.so
+08048000-08049000 r-xp 00000000 08:01 3241023    /home/alumne/Desktop/s5/lab/mem1_dynamic
+08049000-0804a000 r--p 00000000 08:01 3241023    /home/alumne/Desktop/s5/lab/mem1_dynamic
+0804a000-0804b000 rw-p 00001000 08:01 3241023    /home/alumne/Desktop/s5/lab/mem1_dynamic
+0804b000-0804c000 rw-p 00000000 00:00 0 
+0982d000-0984f000 rw-p 00000000 00:00 0          [heap]
+b776f000-b7770000 rw-p 00000000 00:00 0 
+b7781000-b7783000 rw-p 00000000 00:00 0 
+bf910000-bf925000 rw-p 00000000 00:00 0          [stack]
+maps (END) 
+
+
+
+
+PREGUNTA 36. ¿A qué región de las descritas en el maps pertenece cada variable y cada zona reservada con malloc? Apunta la dirección inicial, dirección final y el nombre de la región.
+
+Static: 0970d000-0972f000 rw-p 00000000 00:00 0          [heap]
+Dynamic: 0982d000-0984f000 rw-p 00000000 00:00 0          [heap]
+	 b776f000-b7770000 rw-p 00000000 00:00 0 
+	 b7781000-b7783000 rw-p 00000000 00:00 0 
+
+PREGUNTA 37. Para cada ejecución apunta el número de mallocs hechos y la dirección inicial y final del heap que muestra el fichero maps del /proc. ¿Cambia el tamaño según el parámetro de entrada? ¿Por qué?
+
+	./mem1_dynamic 3 (3 mallocs) :  22000 = 089d9000-089fb000 rw-p 00000000 00:00 0          [heap]
+	./mem1_dynamic 5 (5 mallocs) :  22000 = 09413000-09435000 rw-p 00000000 00:00 0          [heap]
+	./mem1_dynamic 100 (100 mallocs) : 85000 = 09770000-097f5000 rw-p 00000000 00:00 0          [heap]
+	
+	Si cambia, porque para 3 y 5 ya hay heap suficiente encambio para 100 hace falta mas memoria.
+
+PREGUNTA 38. ¿Cuál es el tamaño del heap? ¿Cambia el tamaño según el resultado de la pregunta anterior? ¿Por qué?
+	./mem1_dynamic 3 mallocs	096ec000-0970e000 = 22000 rw-p [heap]
+	./mem1_dynamic 5 mallocs	08409000-0842b000 = 22000 rw-p [heap]
+	./mem1_dynamic 100 mallocs	09149000-091ce000 = 85000 rw-p [heap]
+
+Sí, porque "malloc" prereserva lo que probablemente utilizará.
+
+PREGUNTA 39. Para cada ejecución apunta el número de mallocs hechos y la dirección inicial y final del heap que se muestra en el maps del /proc. ¿Cambia el tamaño del heap respecto al observado en la pregunta 6? ¿Por qué?
+
+	./mem1_dynamic 3 (3 mallocs) :  3000 = 08273000-08276000 rw-p 00000000 00:00 0          [heap]
+	./mem1_dynamic 5 (5 mallocs) :  5000 = 09dda000-09ddf000 rw-p 00000000 00:00 0          [heap]
+	./mem1_dynamic 100 (100 mallocs) : 64000 = 08e79000-08edd000 rw-p 00000000 00:00 0          [heap]
+
+	Si, Ya que el sbrk solo pide la memoria necesaria
+PREGUNTA 40. ¿Qué error contiene el código del programa? ¿Por qué el programa no falla en las primeras iteraciones? Propón una alternativa a este código que evite que se genere la excepción, detectando, antes de que pase, que vamos a hacer un acceso fuera del espacio de direcciones.
+
+	-El error esta al intentar acceder a un puntero fuera del heap.
+
+	-El programa no falla en las primeras iteraciones porque esta dentro del tamaño reservado.
+
+	-La alternativa seria dentro del bucle ir reservando más espacio para así nunca llegar al limite.
+

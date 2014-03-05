@@ -1,0 +1,5 @@
+all:myPS3
+myPS3: myPS3.o
+	gcc -o myPS3 myPS3.c
+clean:
+	rm myPS3 myPS3.o

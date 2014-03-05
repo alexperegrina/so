@@ -1,0 +1,4 @@
+Memoria:
+ c) cd /proc/[pid] --> less maps para ver el inicio y final del bloque si se realica la diferencia se sabe el tamaño del bloque
+con el comando "nm mem1" se observan las variables globales las locales no se pueden obserbar.
+ D) si,es igual porque reservamos memoria para este fin.

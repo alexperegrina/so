@@ -1,0 +1,5 @@
+all:myPS_v0
+myPS_v0: myPS_v0.o
+	gcc -o myPS_v0 myPS_v0.c
+clean:
+	rm myPS_v0 myPS_v0.o

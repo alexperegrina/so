@@ -1,0 +1,22 @@
+Fitxers:
+  B) int fi = lseek(fd, 0, SEEK_END);
+	y en fi contiene el tamaño del archivo
+
+Sistema de Fitxers:
+  A) /home/alumne/A
+     ln -s /home/alumne/A /home/alumne/B
+     ln /home/alumne/B /home/alumne/C
+
+  B) para el fichero B se crea un nuevo inodo. 
+     para el fichero c no se creo un nuevo inodo, tendra el como inodo el indodo de B
+
+  C) stat /home/alumne/B 
+	Links: 2
+	son 2 porque B y C apuntan al mismo inodo
+     stat /home/alumne/C
+	Links: 2
+	Porque C es un hard-link y tiene el mismo inodo que B
+	
+	En los dos casos vemos que el numero de link es 2 y es porque tienen el mismo inodo pero con nombre diferente.
+
+

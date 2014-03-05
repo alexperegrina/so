@@ -1,0 +1,281 @@
+Sesión 3: Procesos
+PREGUNTA 19. ¿Cómo puede saber un proceso el pid de sus hijos? ¿Qué llamada pueden utilizar los procesos para consultar su propio PID?
+
+El PID del hijo es el resultado de retorno del fork() si es -1 esque a generado un error, para obtener el propio PID realizando la llamada a sistema getpid();
+
+PREGUNTA 20. ¿En qué casos se ejecutará cualquier código que aparezca justo después de la llamada execlp (En cualquier caso/ En caso que el execlp se ejecute de forma correcta/ En caso que el exclp falle)?
+
+En caso que el exclp falle
+
+
+PREGUNTA 21. ¿Qué directorios hay dentro de /proc/PID_PADRE? ¿Qué opción de ls has usado?
+
+ls -la
+
+myPS.c
+padre
+dr-xr-xr-x   7 alumne alumne 0 2013-02-26 16:27 .
+dr-xr-xr-x 219 root   root   0 2013-02-26 13:06 ..
+dr-xr-xr-x   2 alumne alumne 0 2013-02-26 16:28 attr
+dr-x------   2 alumne alumne 0 2013-02-26 16:28 fd
+dr-x------   2 alumne alumne 0 2013-02-26 16:28 fdinfo
+dr-xr-xr-x   5 alumne alumne 0 2013-02-26 16:28 net
+dr-xr-xr-x   3 alumne alumne 0 2013-02-26 16:28 task
+
+hijo
+dr-xr-xr-x   7 alumne alumne 0 2013-02-26 16:27 .
+dr-xr-xr-x 219 root   root   0 2013-02-26 13:06 ..
+dr-xr-xr-x   2 alumne alumne 0 2013-02-26 16:28 attr
+dr-x------   2 root   root   0 2013-02-26 16:28 fd
+dr-x------   2 root   root   0 2013-02-26 16:28 fdinfo
+dr-xr-xr-x   2 alumne alumne 0 2013-02-26 16:28 net
+dr-xr-xr-x   3 alumne alumne 0 2013-02-26 16:27 task
+
+
+
+
+myPS_v0.c
+padre
+dr-xr-xr-x   7 alumne alumne 0 2013-02-26 16:29 .
+dr-xr-xr-x 221 root   root   0 2013-02-26 13:06 ..
+dr-xr-xr-x   2 alumne alumne 0 2013-02-26 16:29 attr
+dr-x------   2 alumne alumne 0 2013-02-26 16:29 fd
+dr-x------   2 alumne alumne 0 2013-02-26 16:29 fdinfo
+dr-xr-xr-x   5 alumne alumne 0 2013-02-26 16:29 net
+dr-xr-xr-x   3 alumne alumne 0 2013-02-26 16:29 task
+
+hijo
+
+dr-xr-xr-x   7 alumne alumne 0 2013-02-26 16:30 .
+dr-xr-xr-x 221 root   root   0 2013-02-26 13:06 ..
+dr-xr-xr-x   2 alumne alumne 0 2013-02-26 16:30 attr
+dr-x------   2 alumne alumne 0 2013-02-26 16:30 fd
+dr-x------   2 alumne alumne 0 2013-02-26 16:30 fdinfo
+dr-xr-xr-x   5 alumne alumne 0 2013-02-26 16:30 net
+dr-xr-xr-x   3 alumne alumne 0 2013-02-26 16:30 task
+
+
+PREGUNTA 22. Apunta el contenido de los ficheros status y cmdline. Compara el contenido del fichero environ con el resultado del comando env (fíjate por ejemplo en la variable PATH y la variable PWD) ¿Qué relación hay? Busca en el contenido del fichero status el estado en el que se encuentra el proceso y apúntalo en el fichero de respuestas. 
+
+myPS.c
+
+	padre
+	STATUS
+Name:   myPS
+State:  R (running)
+Tgid:   3242
+Pid:    3242
+PPid:   2226
+TracerPid:      0
+Uid:    1000    1000    1000    1000
+Gid:    1000    1000    1000    1000
+FDSize: 256
+Groups: 4 20 24 46 105 119 122 129 1000 
+VmPeak:     1680 kB
+VmSize:     1612 kB
+VmLck:         0 kB
+VmHWM:       348 kB
+VmRSS:       348 kB
+VmData:       28 kB
+VmStk:        84 kB
+VmExe:         4 kB
+VmLib:      1464 kB
+VmPTE:        20 kB
+Threads:        1
+SigQ:   12/16382
+SigPnd: 0000000000000000
+ShdPnd: 0000000000000000
+SigBlk: 0000000000000000
+SigIgn: 0000000000000000
+SigCgt: 0000000000000000
+CapInh: 0000000000000000
+CapPrm: 0000000000000000
+CapEff: 0000000000000000
+CapBnd: ffffffffffffffff
+Cpus_allowed:   f
+Cpus_allowed_list:      0-3
+Mems_allowed:   1
+Mems_allowed_list:      0
+voluntary_ctxt_switches:        1
+nonvoluntary_ctxt_switches:     6524
+Stack usage:    8 kB
+
+	CMDLINE
+./myPS^@root^@
+cmdline (END) 
+
+
+	hijo
+	STATUS
+Name:   ps
+State:  Z (zombie)
+Tgid:   3243
+Pid:    3243
+PPid:   3242
+TracerPid:      0
+Uid:    1000    1000    1000    1000
+Gid:    1000    1000    1000    1000
+FDSize: 0
+Groups: 4 20 24 46 105 119 122 129 1000 
+Threads:        1
+SigQ:   12/16382
+SigPnd: 0000000000000000
+ShdPnd: 0000000000000000
+SigBlk: 0000000000000000
+SigIgn: 0000000000000000
+SigCgt: 0000000073d3fef9
+CapInh: 0000000000000000
+CapPrm: 0000000000000000
+CapEff: 0000000000000000
+CapBnd: ffffffffffffffff
+Cpus_allowed:   f
+Cpus_allowed_list:      0-3
+Mems_allowed:   1
+Mems_allowed_list:      0
+voluntary_ctxt_switches:        1
+nonvoluntary_ctxt_switches:     4
+
+
+	CMDLINE
+cmdline (END) 
+
+
+myPS_v0.c (./myPS_v0 alex)
+
+	padre
+	STATUS
+Name:   myPS_v0
+State:  R (running)
+Tgid:   3347
+Pid:    3347
+PPid:   2226
+TracerPid:      0
+Uid:    1000    1000    1000    1000
+Gid:    1000    1000    1000    1000
+FDSize: 256
+Groups: 4 20 24 46 105 119 122 129 1000 
+VmPeak:     1680 kB
+VmSize:     1612 kB
+VmLck:         0 kB
+VmHWM:       348 kB
+VmRSS:       348 kB
+VmData:       28 kB
+VmStk:        84 kB
+VmExe:         4 kB
+VmLib:      1464 kB
+VmPTE:        24 kB
+Threads:        1
+SigQ:   13/16382
+SigPnd: 0000000000000000
+ShdPnd: 0000000000000000
+SigBlk: 0000000000000000
+SigIgn: 0000000000000000
+SigCgt: 0000000000000000
+CapInh: 0000000000000000
+CapPrm: 0000000000000000
+CapEff: 0000000000000000
+CapBnd: ffffffffffffffff
+Cpus_allowed:   f
+Cpus_allowed_list:      0-3
+Mems_allowed:   1
+Mems_allowed_list:      0
+voluntary_ctxt_switches:        1
+nonvoluntary_ctxt_switches:     4597
+Stack usage:    4 kB
+
+	CMDLINE
+./myPS_v0^@alex^@
+cmdline (END) 
+
+
+	hijo
+	STATUS
+Name:   myPS_v0
+State:  R (running)
+Tgid:   3348
+Pid:    3348
+PPid:   3347
+TracerPid:      0
+Uid:    1000    1000    1000    1000
+Gid:    1000    1000    1000    1000
+FDSize: 32
+Groups: 4 20 24 46 105 119 122 129 1000 
+VmPeak:     1612 kB
+VmSize:     1612 kB
+VmLck:         0 kB
+VmHWM:       224 kB
+VmRSS:       224 kB
+VmData:       28 kB
+VmStk:        84 kB
+VmExe:         4 kB
+VmLib:      1464 kB
+VmPTE:        24 kB
+Threads:        1
+SigQ:   13/16382
+SigPnd: 0000000000000000
+ShdPnd: 0000000000000000
+SigBlk: 0000000000000000
+SigIgn: 0000000000000000
+SigCgt: 0000000000000000
+CapInh: 0000000000000000
+CapPrm: 0000000000000000
+CapEff: 0000000000000000
+CapBnd: ffffffffffffffff
+Cpus_allowed:   f
+Cpus_allowed_list:      0-3
+Mems_allowed:   1
+Mems_allowed_list:      0
+voluntary_ctxt_switches:        0
+nonvoluntary_ctxt_switches:     14140
+Stack usage:    4 kB
+
+	CMDLINE
+./myPS_v0^@alex^@
+cmdline (END) 
+
+
+El PATH en #env y #cat environ es el mismo.
+El PWD en #env es "PWD=/proc/2510" y en #environ es "PWD=/home/alumne/Downloads/S3/LAB"
+
+PREGUNTA 23. ¿A qué ficheros "apuntan" los ficheros cwd y exe? ¿Cuál crees que es el significado de cwd y exe?
+	El cwd es el Current Working Directory y el "exe" es donde se encuentra el ejecutable y los dos son unos links.
+
+	myPS.c
+	padre:	
+	cwd
+cwd -> /home/alumne/Desktop/s3/lab	
+	exe
+exe -> /home/alumne/Desktop/s3/lab/myPS
+	hijo:	
+	cwd
+cwd
+	exe
+exe
+	myPS_v0.c
+	padre:	
+	cwd
+cwd -> /home/alumne/Desktop/s3/lab
+	exe
+exe -> /home/alumne/Desktop/s3/lab/myPS_v0
+	hijo:	
+	cwd
+cwd -> /home/alumne/Desktop/s3/lab
+	exe
+exe -> /home/alumne/Desktop/s3/lab/myPS_v0
+
+PREGUNTA 24. ¿Puedes mostrar el contenido de los ficheros environ, status y cmdline del proceso hijo? ¿En qué estado se encuentra el hijo?
+myPS.c
+padre:
+State:  R (running)
+hijo:
+State:  Z (zombie)
+
+myPS_v0.c
+padre:
+State:  R (running)
+hijo:
+State:  R (running)
+
+PREGUNTA 25. Comprueba el fichero status de /proc/PID_PADRE /proc/PID_HIJO(s). ¿En qué estado está el proceso padre? ¿En qué estado están los hijos? 
+PREGUNTA 26. ¿Qué has hecho para guardar la salida de las ejecuciones de myPS3?
+

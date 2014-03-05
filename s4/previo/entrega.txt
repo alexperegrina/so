@@ -1,0 +1,32 @@
+
+#--alarm1:
+1) no pasa nada porque esta pausado el processo lo interesante esta al cabo de los 50 segundo ya que salta el signal y se ejecuta RSS del alarm() y finaliza el proceso.
+2) No, el mensaje es diferente y es: "Killed"
+3) se encarga la rutina de atencion al signal en mostrar el mensaje que es llamada cuando atiende la interrupcion del SIGALARM.la shell recoge el
+	estado con WEXITSTATUS()
+4) no es necesario ya que la rutina del SIGALARM finaliza el proceso.
+
+#--alarm2:
+1) por cada vez que se ejecuta kill -ALRM "PID" se llama a la rutina de atencion al signal, No es el comportamiento base del codigo.
+2) No se pueden reprogramar todos los signal, por ejemplo SIGSTOP y SIGKILL.
+3) cuando entramos a la rutina de atencion al signal deveriamos de consultar el valor de retono en un condicional y si fuera distinto de zero pues en este caso
+	no se haria el tratamiento normal del signal SIGALRM.
+
+#--alarm3:
+1) Lo reciven los dos, lo he observado en la shell ya que se muestra dos vezes el mensaje  y se observa los PID que son consecutivos donde el mayor es el PID del 
+	proceso hijo.
+
+#--alarm4:
+1) Solo se puede programar un SIGALRMS, Cuando entramos en lla condicion (fork()==0) alarm es modificada por el proceso hijo entences es solo atendida por el hijo.
+	lo he comprovado con el comando ps ax y observando :
+	2804 pts/0    S+     0:00 ./alarm4
+ 	2805 pts/0    S+     0:00 ./alarm4
+
+	y viendo el resultado por pantalla e visto que lo ejecuta el proceso hijo.
+
+#--ejemplo_waitpid
+		if(pid > 0) {
+			if(WIFEXITED(res)) sprintf(buff,"Termina el proceso %d con exito.\n",pid);
+			if(WIFSIGNALED(res)) sprintf(buff,"Termina el proceso %d por un signal.\n",pid);		
+		}
+

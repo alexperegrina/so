@@ -1,0 +1,191 @@
+
+Sesión 3: Procesos
+
+
+/**Ejecuta ejemplo_fork1.**/
+
+1)ubuntu:~/Desktop/SO/s3/previo> ./ejemplo_fork1
+2)Soy el proceso 2387
+3)ubuntu:~/Desktop/SO/s3/previo> Soy el proceso 2388
+
+1)ejecutamos el proceso padre.
+2)mueestra el PID del proceso padre
+3)ejecuta el proceso hijo desde la instruccion(pid = fork()) y muestra el valor del PID hijo.
+
+
+/**Ejecuta ejemplo_fork2.**/
+
+1)ubuntu:~/Desktop/SO/s3/previo> ./ejemplo_fork2
+2)Antes del fork: Soy el proceso 2382
+3)PADRE: Soy el proceso 2382
+4)Los DOS: Soy el proceso 2382
+5)ubuntu:~/Desktop/SO/s3/previo> HIJO: Soy el proceso 2383
+6)Los DOS: Soy el proceso 2383
+
+1) ejecuta el proceso padre.
+2) muestra el PID del proceso padre antes de crear el proceso por lo cual solo se mostrara en el proceso padre. 
+3) codigo que se elige comprovando la variable pid que contiene el retorno de el fork() que es el PID del proceso hijo.
+4) PID de el proceso padre que tambien se mostrara en el proceso hijo pero con el PID del hijo ya que no se condiciona para poder mostrarlo .
+5) se ejecuta el codigo desde la llamado del fork pero como en el proceso hijo el fork() que es llamado desde el padre devuelve un 0.
+	por lo cual cuando entramos en el condicional el valor de pib = 0 y muestra el PID del hijo con diferente texto.
+6) como este sprintf no esta condicionado por el PID tambien se muestra en el proceso hijo.
+
+
+
+/**Ejecuta ejemplo_fork3.**/
+
+1)ubuntu:~/Desktop/SO/s3/previo> ./ejemplo_fork3
+2)Antes del fork: Soy el proceso 2399
+3)PADRE: Soy el proceso 2399
+4)Solo lo ejecuta el padre: Soy el proceso 2399
+5)ubuntu:~/Desktop/SO/s3/previo> HIJO: Soy el proceso 2400
+
+1) ejecuta el proceso padre.
+2) muestra el PID del proceso padre antes de crear el proceso por lo cual solo se mostrara en el proceso padre.
+3) codigo que se elige comprovando la variable pid que contiene el retorno de el fork() que es el PID del proceso hijo.
+4) se muestra el PID del proceso padre, el motivo que solo se muestre en el proceso padre es porque en el proceso hijo ejecutamos un exit() despues
+	de mostrar un texto, con la instuccion exit() finaliza el proceso sin poder ejecutar las siguientes instrucciones.
+5) muesta el PID del proceso hijo y a continuacion finaliza el proceso.
+
+/**Ejecuta ejemplo_fork4.**/
+
+Primero los mensajes del proceso padre y luego los mensajes del proceso hijo.
+
+1)ubuntu:~/Desktop/SO/s3/previo> ./ejemplo_fork4
+2)Antes del fork: Soy el proceso 2432
+3)PADRE: Soy el proceso 2432
+4)Solo lo ejecuta el padre: Soy el proceso 2432
+5)ubuntu:~/Desktop/SO/s3/previo> HIJO: Soy el proceso 2433
+6)HIJO acaba: Soy el proceso 2433
+
+1) ejecuta el proceso padre.
+2) muestra el PID del proceso padre antes de crear el proceso por lo cual solo se mostrara en el proceso padre.
+3) codigo que se elige comprovando la variable pid que contiene el retorno de el fork() que es el PID del proceso hijo.
+4) se muestra el PID del proceso padre, el motivo que solo se muestre en el proceso padre es porque en el proceso hijo ejecutamos un exit() despues
+	de mostrar un texto, con la instuccion exit() finaliza el proceso sin poder ejecutar las siguientes instrucciones.
+5) muestra el PID del proceso hijo 
+6) despues de un tiempo de espera muesta el PID del proceso hijo con diferente texto
+
+/** Ejecuta ejemplo_fork5.**/
+
+1)ubuntu:~/Desktop/SO/s3/previo> ./ejemplo_fork5
+2)Antes del fork: Soy el proceso 2452
+3)PADRE: Soy el proceso 2452
+4)HIJO: Soy el proceso 2453
+5)HIJO:La variable_global vale A y la local a
+6)PADRE:La variable_global vale A y la local a
+7)Solo lo ejecuta el padre: Soy el proceso 2452
+
+1) ejecuta el proceso padre.
+2) muestra el PID del proceso padre antes de crear el proceso por lo cual solo se mostrara en el proceso padre.
+3) codigo que se elige comprovando la variable pid que contiene el retorno de el fork() que es el PID del proceso hijo.
+4) como en el proceso padre hacemos una llamada a sitema waitpid(-1, NULL, 0); y lo que raliza es suspendel el proceso actual asta que el proceso hijo 
+	haga un cambio de estado. Por lo cual entramos a ejecutar el proceso hijo y mostramos su PID.
+5) dentro del mismo proceso mostramos los valores de una variable global y una variable local y finalizamos el proceso con la instrucion exit();
+6) como el hijo ha cambiado de estado(finalizado -- Zomby) vuelve a ejecutar el proceso padre.
+7) se muestra el PID del proceso padre, el motivo que solo se muestre en el proceso padre es porque en el proceso hijo ejecutamos un exit() despues
+	de mostrar un texto, con la instuccion exit() finaliza el proceso sin poder ejecutar las siguientes instrucciones.
+	
+
+/** Ejecuta ejemplo_fork6. **/
+
+ Cambiará el PID, lo demás, al ser variables globales será igual.
+        Va mostrando como van cambiando las variables cada x iteraciones, tanto para el padre como para el hijo.
+
+
+1)ubuntu:~/Desktop/SO/s3/previo> ./ejemplo_fork6
+2)Antes del fork: Soy el proceso 2488
+3)PADRE: Soy el proceso 2488
+  .
+  .
+x).
+  .
+  .
+x)PADRE:La variable_global vale k
+x+1)Solo lo ejecuta el padre: Soy el proceso 2488
+x+2)ubuntu:~/Desktop/SO/s3/previo> HIJO: Soy el proceso 2489
+x+3)HIJO:La variable_global vale B
+    .
+    .
+x+3+y).
+    .
+    .
+x+3+y)HIJO:La variable_global vale K
+
+1) ejecuta el proceso padre.
+2) muestra el PID del proceso padre antes de crear el proceso por lo cual solo se mostrara en el proceso padre.
+3 i x) codigo que se elige comprovando la variable pid que contiene el retorno de el fork() que es el PID del proceso hijo.
+	   cambia el valor de la variable local del proceso padre = 'a' y realiçando un proceso de seleccion ciclico incrementa la variable local 
+		para ir cambiando el valor del caracter y utilizando una funcion muestra el valor del caracter desde el proceso padre.	
+x+1) despues de finalizar el proceso ciclico se muestra el PID del proceso padre, el motivo que solo se muestre en el proceso padre es porque 
+	en el proceso hijo ejecutamos un exit() despues	de mostrar un texto, con la instuccion exit() finaliza el proceso sin poder ejecutar las 
+	siguientes instrucciones.
+x+2) muestra el PID del proceso hijo 
+x+3 i x+3+y) codigo que se elige comprovando la variable pid que contiene el retorno de el fork() que desde el proceso hijo es pid=0.
+	 como se realiza una copia exacta del proceso padre el contenido de las variable es igual que el del proceso padre que es 'A',
+	 realiçando un proceso de seleccion ciclico incrementa la variable local para ir cambiando el valor del caracter y utilizando una funcion muestra el valor del caracter 	 desde el proceso hijo.	
+
+/** Ejecuta ejemplo_fork7. **/
+
+No compila porque para realicar la llamada a sistema de exit() se necessita la libreria "#include <unistd.h>".
+Para mostrar el valor de la variable local solo la tenemos que pasar por parametro en la funcion "Escribe_variables(variable_local);".
+
+
+/** Ejecuta ejemplo_exec1 **/
+
+ubuntu:~/Desktop/SO/s3/previo> ./ejemplo_exec1
+Soy el proceso: 3097
+total 12432
+-rwxr-xr-x 1 alex alex     7297 2013-02-24 15:06 ejemplo_exec1
+-rw-r--r-- 1 alex alex      296 2012-02-02 01:52 ejemplo_exec1.c
+-rwxr-xr-x 1 alex alex     7335 2013-02-24 15:06 ejemplo_exec2
+-rw-r--r-- 1 alex alex      302 2012-02-02 01:52 ejemplo_exec2.c
+-rwxr-xr-x 1 alex alex     7295 2013-02-24 15:06 ejemplo_fork1
+-rw-r--r-- 1 alex alex      297 2012-02-02 01:52 ejemplo_fork1.c
+-rwxr-xr-x 1 alex alex     7333 2013-02-24 15:06 ejemplo_fork2
+-rw-r--r-- 1 alex alex      900 2012-02-02 01:52 ejemplo_fork2.c
+-rwxr-xr-x 1 alex alex     7369 2013-02-24 15:06 ejemplo_fork3
+-rw-r--r-- 1 alex alex      972 2012-02-02 01:52 ejemplo_fork3.c
+-rwxr-xr-x 1 alex alex     7408 2013-02-24 15:06 ejemplo_fork4
+-rw-r--r-- 1 alex alex     1188 2013-02-24 14:48 ejemplo_fork4.c
+-rwxr-xr-x 1 alex alex     7444 2013-02-24 15:06 ejemplo_fork5
+-rw-r--r-- 1 alex alex     1466 2013-02-24 14:50 ejemplo_fork5.c
+-rwxr-xr-x 1 alex alex     7445 2013-02-24 15:06 ejemplo_fork6
+-rw-r--r-- 1 alex alex     1724 2013-02-24 14:52 ejemplo_fork6.c
+-rwxr-xr-x 1 alex alex     7439 2013-02-24 15:06 ejemplo_fork7
+-rw-r--r-- 1 alex alex     1382 2013-02-24 15:06 ejemplo_fork7.c
+-rw-r--r-- 1 alex alex 12601035 2013-02-24 15:06 fork6out.txt
+-rw-r--r-- 1 alex alex      653 2013-02-24 14:37 Makefile.ejemplos
+-rw-r--r-- 1 alex alex     8076 2013-02-24 15:05 previo.txt
+-rw-r--r-- 1 alex alex      615 2012-02-02 01:52 README_S3
+
+
+1) ejecuta el proceso padre.
+2) muestra el PID del proceso padre.
+3) ejecuta la sentencia ls -l con la llamada a sistema "execlp("ls", "ls", "-l", (char *) 0);"
+
+
+
+/** Ejecuta ejemplo_exec1 **/
+
+ubuntu:~/Desktop/SO/s3/previo> ./ejemplo_exec2
+Soy el proceso: 3103
+Soy el proceso 3103
+ubuntu:~/Desktop/SO/s3/previo> Soy el proceso 3104
+
+1) ejecuta el proceso padre.
+2) muestra el PID del proceso padre.
+3) con la llamada a sistema "execlp("./ejemplo_fork1", "ejemplo_fork1", (char *) 0);" ejecutamos el ejecutable ejemplo_fork1 y muestra el PID del mismo proceso
+4) muestra el PID  del proceso hijo.
+
+Y se ejecutan 2 procesos, el del ejemplo_exec1 pasa a ser el ejemplo_fork1(Padre) y luego se crea el hijo.
+
+/** consulta man **/
+man fork
+man waitpid
+
+
+
+
+
+
